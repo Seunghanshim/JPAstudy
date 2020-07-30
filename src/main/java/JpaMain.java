@@ -1,4 +1,5 @@
 import domain.Order;
+import domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +16,7 @@ public class JpaMain {
         tx.begin();
 
         try {
-
+            
             tx.commit();
         }catch(Exception e){
             tx.rollback();
