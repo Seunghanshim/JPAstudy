@@ -14,9 +14,10 @@ public class JpaMain {
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-
         try {
-            
+            Order order = new Order();
+            em.persist(order);
+
             tx.commit();
         }catch(Exception e){
             tx.rollback();
