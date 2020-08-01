@@ -7,6 +7,9 @@ JPA study
  
  - 주문 시 여러 종류의 상품을 선택할 수 있다.
  
+ - 상품의 종류는 음반, 도서, 영화가 있고 이후 더 확장될 수 있다.
+ 
+ - 모든 데이터는 등록일과 수정일이 포함된다.
  
 # 기능 목록
   ## 회원 기능
@@ -28,19 +31,22 @@ JPA study
   반대로 같은 상품도 여러번 주문될 수 있다. 
   주문상품이라는 모델을 만들어서 N:N 관계를 1:N, N:1 관계로 풀어냈다.
   - 배송, 카테고리를 추가하였다.
+  - 상품의 종류를 추가하였다.
   
-      ![모델](https://user-images.githubusercontent.com/68942616/89035402-d49e4d00-d375-11ea-85fa-712cd4f7afd0.png)
+      ![모델](https://user-images.githubusercontent.com/68942616/89101861-f1528780-d43e-11ea-8c2d-909afb4c4c65.png)
   
   
 # 테이블 설계
-   ![테이블](https://user-images.githubusercontent.com/68942616/89035398-d36d2000-d375-11ea-8820-f10fa7fdd989.PNG)
+  - 상품 테이블의 상속 전략은 Single table로 구현하였다.
+  
+   ![테이블](https://user-images.githubusercontent.com/68942616/89101865-f4e60e80-d43e-11ea-897c-76746472ce07.PNG)
       
       
 # 객체 구조
   - 참조를 사용하도록 변경하였다.
-  - 카테고리와 상품의 관계를 Category_ITEM이라는 모델을 만들어서 1:N, N:1 관계로 풀어냈다.
+  - 카테고리와 상품의 관계를 Category_Item이라는 Class을 만들어서 1:N, N:1 관계로 풀어냈다.
   
-   ![엔티티](https://user-images.githubusercontent.com/68942616/89035394-d1a35c80-d375-11ea-96fd-84b3b8ffb02f.PNG)
+   ![엔티티](https://user-images.githubusercontent.com/68942616/89101863-f3b4e180-d43e-11ea-91fa-717e8d8728ec.PNG)
 
 
 # 연관관계 매핑 포인트
@@ -55,3 +61,18 @@ JPA study
   - 테이블의 N:M 관계는 중간테이블을 이용해서 1:N, N:1관계로 풀어낸다.
   - 실전에서 N:M 관계를 지양해야하는 이유는 중간 테이블이 단순하지 않기 때문이다.
   - 따라서 실전에서는 @ManyToMany를 사용하지 않는다.
+  
+
+# 상속관계 매핑 포인트
+  - 관계형 데이터베이스는 상속 관계가 없다.
+  - 상속관계 매핑(@Inheritance)에는 3가지 전략이 있다. (JOINED, SINGLE_TABLE, TABLE_PER_CLASS)
+  - TABLE_PER_CLASS는 사용을 지양한다. (조회시 성능 저하, 쿼리 문제 때문)
+  - 상속관계에서 data type column을 위해 @DiscriminatorColumn을 사용한다. (부모 클래스)
+  - DB에서 DTYPE에 저장될 명칭을 위해 @DiscriminatorValue를 사용한다. (자식 클래스)
+  
+# @MappedSuperclass
+  - 상속관계 매핑이 아니고, 엔티티가 아니기 때문에 테이블과 매핑이 되지도 않는다.
+  - 단순히 엔티티가 공통으로 사용하는 매핑 정보를 모아서 관리할 수 있게 도와준다.
+  - 조회가 불가능하고 직접 생석해서 사용할 일이 없으므로 추상 클래스로 사용한다.
+  - @Entity 클래스는 @Entity나 @MappedSuperclass로 지정한 클래스만 상속이 가능하다.
+  
