@@ -1,6 +1,4 @@
-import domain.Book;
-import domain.Order;
-import domain.OrderItem;
+import domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,10 +14,14 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Book book = new Book();
-            book.setName("JPA");
+            Member member = new Member();
+            member.setName("ssh");
 
-            em.persist(book);
+            Address address = new Address("서울시","이목로 24","xxxx");
+
+            member.setAddress(address);
+
+            em.persist(member);
 
             tx.commit();
         }catch(Exception e){
