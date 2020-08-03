@@ -46,7 +46,7 @@ JPA study
   - 참조를 사용하도록 변경하였다.
   - 카테고리와 상품의 관계를 Category_Item이라는 Class을 만들어서 1:N, N:1 관계로 풀어냈다.
   
-   ![엔티티](https://user-images.githubusercontent.com/68942616/89101863-f3b4e180-d43e-11ea-91fa-717e8d8728ec.PNG)
+   ![엔티티](https://user-images.githubusercontent.com/68942616/89191596-20532f80-d5de-11ea-893c-5a0e8105476f.PNG)
 
 
 # 연관관계 매핑 포인트
@@ -89,3 +89,11 @@ JPA study
   - 고아 객체 제거(orphanReval = true): 부모 Entity와 연관관계가 끊어진 자식 Entity를 자동으로 삭제한다.
   - 참조하는 곳이 하나일 때만 사용해야한다. (주의)
   
+# 엔티티 타입의 특징
+  - 식별자가 존재하고 생명 주기를 관리할 수 있다.
+  - 공유 가능하다
+  
+# 값 타입의 특징
+  - 식별자가 존재하지 않고 생명 주기가 엔티티에 의존한다.
+  - 공유하지 않는 것이 안전하다. (복사해서 사용한다)
+  - 불변 객체로 만드는 것이 안전하다. (ex) setter를 private 혹은 만들지 않는다)
